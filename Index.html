@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#692c70">
+
+    <title>Feliz cumpleaños, mamá ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 28px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            font-family: 'Quicksand', sans-serif;
+            background:
+                radial-gradient(circle at top, #a64d91 0%, transparent 45%),
+                linear-gradient(145deg, #321746, #692c70, #bd527b);
+            overflow-x: hidden;
+        }
+
+        .luces {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .luz {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ffe9a8;
+            box-shadow: 0 0 15px 4px #ffc5e1;
+            animation: brillar 3s infinite ease-in-out;
+        }
+
+        .luz:nth-child(1) { top: 12%; left: 10%; }
+        .luz:nth-child(2) { top: 25%; right: 12%; animation-delay: .8s; }
+        .luz:nth-child(3) { top: 60%; left: 5%; animation-delay: 1.3s; }
+        .luz:nth-child(4) { top: 75%; right: 8%; animation-delay: .4s; }
+        .luz:nth-child(5) { top: 42%; right: 5%; animation-delay: 1.7s; }
+        .luz:nth-child(6) { top: 88%; left: 18%; animation-delay: .9s; }
+
+        @keyframes brillar {
+            0%, 100% { opacity: .25; transform: scale(.7); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .contenido {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.12);
+            border-radius: 30px;
+            font-size: .75rem;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.7rem, 10vw, 3.7rem);
+            line-height: 1.05;
+            margin: 0 0 8px;
+            color: #fff2c7;
+            text-shadow: 0 0 20px rgba(255,220,151,.35);
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        .subtitulo {
+            font-size: .95rem;
+            margin: 0 0 22px;
+            color: #ffe5f0;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .tarjeta {
+            background: #fffafc;
+            color: #57364f;
+            padding: 16px;
+            border-radius: 24px;
+            border: 2px solid #f9d5e4;
+            box-shadow: 0 15px 40px rgba(25,0,30,.3);
+        }
+
+        .foto-container {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .foto-container img {
+            display: block;
+            width: 100%;
+            max-height: 340px;
+            object-fit: contain;
+            border-radius: 17px;
+            border: 3px solid #f4c2d8;
+            background: #fceaf2;
+        }
+
+        .corazon {
+            position: absolute;
+            bottom: -12px;
+            right: 12px;
+            font-size: 30px;
+            filter: drop-shadow(0 3px 3px #e5b0c7);
+            animation: latir 1.3s infinite;
+        }
+
+        @keyframes latir {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .separador {
+            color: #d68ba9;
+            font-size: 22px;
+            margin: 8px 0 12px;
+            letter-spacing: 5px;
+        }
+
+        .mensaje {
+            text-align: left;
+            font-size: .91rem;
+            line-height: 1.75;
+            font-weight: 500;
+        }
+
+        .mensaje p { margin: 0 0 14px; }
+        .mensaje strong { color: #a13e70; }
+
+        .frase-final {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            color: #a13e70;
+            font-size: 1.8rem;
+            line-height: 1.25;
+            margin: 20px 0 8px;
+        }
+
+        .firma {
+            text-align: center;
+            font-size: .85rem;
+            margin-top: 10px;
+        }
+
+        .pie {
+            font-size: .75rem;
+            color: #f9dce9;
+            margin: 20px 0 5px;
+        }
+
+        @media (max-width: 360px) {
+            body { padding: 20px 10px; }
+            .tarjeta { padding: 12px; }
+            .mensaje { font-size: .85rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="luces" aria-hidden="true">
+        <span class="luz"></span>
+        <span class="luz"></span>
+        <span class="luz"></span>
+        <span class="luz"></span>
+        <span class="luz"></span>
+        <span class="luz"></span>
+    </div>
+
+    <!-- Música oculta, sin controles -->
+    <audio id="musica" autoplay loop preload="auto">
+        <source src="mananitas.mp3" type="audio/mpeg">
+    </audio>
+
+    <main class="contenido">
+
+        <div class="etiqueta">UN DÍA MUY ESPECIAL ✨</div>
+
+        <h1>¡Feliz cumpleaños,<br>mamá!</h1>
+
+        <p class="subtitulo">
+            Hoy celebramos el regalo más bonito: tu vida. 💗
+        </p>
+
+        <section class="tarjeta">
+
+            <div class="foto-container">
+                <img src="foto.jpg" alt="Un recuerdo especial con mamá">
+                <span class="corazon">💖</span>
+            </div>
+
+            <div class="separador">✦ ♡ ✦</div>
+
+            <div class="mensaje">
+
+                <p>
+                    <strong>Feliz cumpleaños, mamá.</strong> ❤️
+                    Hoy es un día muy especial porque celebramos la vida
+                    de la persona que significa tanto para mí.
+                    Y aunque a veces no encuentre las palabras correctas
+                    para expresarlo, quiero que sepas cuánto te amo.
+                </p>
+
+                <p>
+                    Gracias por cada esfuerzo que haces por mí, por
+                    preocuparte, por apoyarme y por darme tanto amor
+                    incluso en los días difíciles. Sé que muchas veces
+                    has tenido que hacer sacrificios para que yo esté
+                    bien, y quiero que sepas que nada de eso pasa
+                    desapercibido para mí.
+                </p>
+
+                <p>
+                    Admiro tu fuerza, tu corazón y todo lo que haces
+                    por nuestra familia. Si algún día llego a ser
+                    la persona que sueño ser, una parte muy importante
+                    de ese logro será gracias a ti, a tus enseñanzas
+                    y a todo lo que me has dado.
+                </p>
+
+                <p>
+                    Mi mayor deseo es que la vida te regale muchos
+                    años más, llenos de salud, tranquilidad, alegría
+                    y motivos para sonreír. Quiero verte feliz,
+                    cumplir tus sueños y poder darte, poco a poco,
+                    tantas cosas bonitas como las que tú me has dado.
+                </p>
+
+                <p>
+                    Perdóname si a veces no te digo lo suficiente
+                    cuánto te quiero o si no siempre sé demostrarlo.
+                    Nunca dudes de que eres una de las personas más
+                    importantes de mi vida. Siempre voy a agradecer
+                    tenerte como mamá.
+                </p>
+
+            </div>
+
+            <div class="separador">♡ ✨ ♡</div>
+
+            <div class="frase-final">
+                Te mereces todo lo bonito de este mundo.
+                <br>
+                ¡Te amo muchísimo, mamá! 💖
+            </div>
+
+            <p class="firma">
+                Con todo mi corazón, para ti. 🌷
+            </p>
+
+        </section>
+
+        <p class="pie">
+            Hecho con mucho amor, especialmente para ti. ❤️
+        </p>
+
+    </main>
+
+    <script>
+        const musica = document.getElementById("musica");
+
+        // Intenta reproducir Las Mañanitas al abrir la página.
+        function iniciarMusica() {
+            musica.play().catch(() => {
+                // Si el navegador bloquea el autoplay,
+                // el primer toque en cualquier parte la inicia.
+            });
+        }
+
+        // Confeti automático al entrar.
+        function celebrarAutomaticamente() {
+            if (typeof confetti !== "function") return;
+
+            const colores = [
+                "#ffb3d1",
+                "#ffe6a6",
+                "#ffffff",
+                "#e879b0",
+                "#d9b3ff"
+            ];
+
+            // Primera explosión
+            confetti({
+                particleCount: 160,
+                spread: 110,
+                startVelocity: 45,
+                origin: { x: 0.5, y: 0.6 },
+                colors: colores
+            });
+
+            // Explosiones laterales
+            setTimeout(() => {
+                confetti({
+                    particleCount: 70,
+                    angle: 60,
+                    spread: 65,
+                    origin: { x: 0, y: 0.65 },
+                    colors: colores
+                });
+
+                confetti({
+                    particleCount: 70,
+                    angle: 120,
+                    spread: 65,
+                    origin: { x: 1, y: 0.65 },
+                    colors: colores
+                });
+            }, 500);
+
+            // Lluvia suave durante varios segundos
+            const final = Date.now() + 8000;
+
+            const intervalo = setInterval(() => {
+                if (Date.now() >= final) {
+                    clearInterval(intervalo);
+                    return;
+                }
+
+                confetti({
+                    particleCount: 5,
+                    spread: 65,
+                    startVelocity: 25,
+                    origin: { x: Math.random(), y: 0 },
+                    colors: colores,
+                    gravity: 1.1,
+                    ticks: 180
+                });
+            }, 250);
+        }
+
+        // Al abrir la página
+        window.addEventListener("load", () => {
+            celebrarAutomaticamente();
+            iniciarMusica();
+        });
+
+        // Si el navegador bloqueó la música, el primer toque
+        // en cualquier lugar de la página intenta iniciarla.
+        document.addEventListener("pointerdown", () => {
+            if (musica.paused) {
+                iniciarMusica();
+            }
+        }, { once: true });
+    </script>
+
+</body>
+  </html>
